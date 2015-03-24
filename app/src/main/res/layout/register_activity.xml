@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/login_bg">
+    android:layout_height="wrap_content"
+    android:background="@drawable/plain_bg">
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,8 +19,7 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="112dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
         <EditText
@@ -57,6 +56,39 @@
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/password" />
 
+        <EditText
+            android:id="@+id/retype_password_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip"
+            android:hint="Retype Password"
+            android:textSize="18sp"
+            android:gravity="center_vertical|start"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/mTeal"
+            android:textColorHint="@color/mTeal"
+            android:background="@drawable/inputs_02"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/password" />
+
+        <EditText
+            android:id="@+id/contact_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip"
+            android:hint="Mobile Number"
+            android:textSize="18sp"
+            android:gravity="center_vertical|start"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="@color/mTeal"
+            android:textColorHint="@color/mTeal"
+            android:background="@drawable/inputs_02"
+            android:drawableStart="@drawable/username"
+            android:drawablePadding="5dp" />
         <Button
             android:id="@+id/dummy_button"
             android:layout_width="match_parent"
@@ -65,34 +97,7 @@
             android:background="@drawable/login_selector"
             android:singleLine="false" />
 
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            >
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:text="Don't have account?"
-                android:textSize="20sp"
-                android:id="@+id/register"
-                android:onClick="register"
-                />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="0"
-                android:layout_gravity="end"
-                android:text="Skip"
-                android:textSize="20sp"
-                android:id="@+id/skip"
-                />
-        </LinearLayout>
-
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
