@@ -3,79 +3,93 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_screen"
-    >
+    android:background="@drawable/login_bg">
 
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="112dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/linearLayout"
+        <EditText
+            android:id="@+id/username_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip"
+            android:hint="Email ID"
+            android:textSize="18sp"
+            android:gravity="center_vertical|start"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="@color/mTeal"
+            android:textColorHint="@color/mTeal"
+            android:background="@drawable/inputs_02"
+            android:drawableStart="@drawable/username"
+            android:drawablePadding="5dp" />
+
+        <EditText
+            android:id="@+id/password_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip"
+            android:hint="Password"
+            android:textSize="18sp"
+            android:gravity="center_vertical|start"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/mTeal"
+            android:textColorHint="@color/mTeal"
+            android:background="@drawable/inputs_02"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/password" />
+
+        <Button
+            android:id="@+id/dummy_button"
             android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textColor="@color/mOrange"
+            android:background="@drawable/login_selector"
+            android:singleLine="false" />
+
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:layout_gravity="center"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="102dp">
-
-            <EditText
-                android:id="@+id/username_text"
-                android:layout_width="fill_parent"
-                android:layout_height="53dp"
-                android:layout_marginBottom="20dip"
-                android:layout_marginTop="5dip"
-                android:hint="Email ID"
-                android:textSize="20sp"
-                android:gravity="left|center_vertical"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textColor="@color/mTeal"
-                android:textColorHint="@color/mTeal"
-                android:background="@drawable/inputs_02"
-                android:drawableLeft="@drawable/email_left"
-               />
-
-            <EditText
-                android:id="@+id/password_text"
-                android:layout_width="fill_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dip"
-                android:layout_marginTop="5dip"
-                android:hint="Password"
-                android:textSize="20sp"
-                android:gravity="left|center_vertical"
-                android:inputType="textPassword"
-                android:singleLine="true"
-                android:textColor="@color/mTeal"
-                android:textColorHint="@color/mTeal"
-                android:background="@drawable/inputs_02"
-                android:drawableLeft="@drawable/pass_left"/>
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="fill_parent"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            >
+            <TextView
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="Remember Me"
-                android:textColor="@color/mTeal"
-                android:textSize="20sp"/>
-
-            <Button
-                android:id="@+id/dummy_button"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:textColor="@color/mOrange"
-                android:background="@drawable/login_selector"
-                android:singleLine="false" />
-
-
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:text="Don't have account?"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:layout_gravity="end"
+                android:text="Skip"
+                android:textSize="20sp"
+                />
         </LinearLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>
