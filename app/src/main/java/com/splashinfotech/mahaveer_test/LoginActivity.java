@@ -1,9 +1,10 @@
 package com.splashinfotech.mahaveer_test;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
@@ -115,7 +115,17 @@ public class LoginActivity extends Activity{
                         session.setSession_id(sessionID);
                         session.setFirstname(first_name);
                         session.setUsername(username);
-                        Toast.makeText(getApplicationContext(), "Welcome "+first_name, Toast.LENGTH_SHORT).show();
+
+                        toast=Toast.makeText(getApplicationContext(), "Welcome "+first_name, Toast.LENGTH_SHORT);
+                        v = toast.getView();
+                        text = (TextView) v.findViewById(android.R.id.message);
+                        text.setTextColor(getResources().getColor(R.color.mWhite));
+                        text.setShadowLayer(0,0,0,0);
+                        v.setBackgroundResource(R.color.mGreen);
+                        //toast.setGravity(Gravity.TOP, 0, 950);
+                        toast.show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
                     else {
                         //String error=obj.getString("error");
@@ -161,6 +171,22 @@ public class LoginActivity extends Activity{
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_delete).setTitle("Exit")
+                .setMessage("Are you sure?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).setNegativeButton("no", null).show();
     }
 
 }
