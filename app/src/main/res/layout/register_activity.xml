@@ -1,27 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/plain_bg">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:layout_gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/first_name"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="5dip"
+                android:hint="First Name"
+                android:textSize="18sp"
+                android:gravity="center_vertical|start"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/mTeal"
+                android:textColorHint="@color/mTeal"
+                android:background="@drawable/inputs_02"
+                android:drawableStart="@drawable/user_bg"
+                android:drawablePadding="5dp" /></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="5dip"
+                android:hint="Last Name"
+                android:textSize="18sp"
+                android:gravity="center_vertical|start"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/mTeal"
+                android:textColorHint="@color/mTeal"
+                android:background="@drawable/inputs_02"
+                android:drawableStart="@drawable/user_bg"
+                android:drawablePadding="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/username_text"
             android:layout_width="fill_parent"
@@ -38,7 +78,10 @@
             android:background="@drawable/inputs_02"
             android:drawableStart="@drawable/username"
             android:drawablePadding="5dp" />
-
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <EditText
             android:id="@+id/password_text"
             android:layout_width="fill_parent"
@@ -54,8 +97,10 @@
             android:textColorHint="@color/mTeal"
             android:background="@drawable/inputs_02"
             android:drawablePadding="5dp"
-            android:drawableStart="@drawable/password" />
-
+            android:drawableStart="@drawable/password" /></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <EditText
             android:id="@+id/retype_password_text"
             android:layout_width="fill_parent"
@@ -71,8 +116,10 @@
             android:textColorHint="@color/mTeal"
             android:background="@drawable/inputs_02"
             android:drawablePadding="5dp"
-            android:drawableStart="@drawable/password" />
-
+            android:drawableStart="@drawable/password" /></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <EditText
             android:id="@+id/contact_text"
             android:layout_width="fill_parent"
@@ -87,16 +134,77 @@
             android:textColor="@color/mTeal"
             android:textColorHint="@color/mTeal"
             android:background="@drawable/inputs_02"
-            android:drawableStart="@drawable/username"
-            android:drawablePadding="5dp" />
+            android:drawableStart="@drawable/contacts"
+            android:drawablePadding="5dp" /></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/address1_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip"
+            android:hint="Address Line 1"
+            android:textSize="18sp"
+            android:gravity="center_vertical|start"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="@color/mTeal"
+            android:textColorHint="@color/mTeal"
+            android:background="@drawable/inputs_02"
+            android:drawableStart="@drawable/address"
+            android:drawablePadding="5dp" /></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/address2_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip"
+            android:hint="Address Line 2"
+            android:textSize="18sp"
+            android:gravity="center_vertical|start"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="@color/mTeal"
+            android:textColorHint="@color/mTeal"
+            android:background="@drawable/inputs_02"
+            android:drawableStart="@drawable/address"
+            android:drawablePadding="5dp" /></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/city_text"
+                android:enabled="false"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="5dip"
+                android:text="Aurangabad"
+                android:textSize="18sp"
+                android:gravity="center_vertical|start"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/mTeal"
+                android:textColorHint="@color/mTeal"
+                android:background="@drawable/inputs_02"
+                android:drawableStart="@drawable/city_bg"
+                android:drawablePadding="5dp" /></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <Button
             android:id="@+id/dummy_button"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:textColor="@color/mOrange"
             android:background="@drawable/login_selector"
-            android:singleLine="false" />
-
+            android:singleLine="false" /></LinearLayout>
 
     </LinearLayout>
 

@@ -24,7 +24,7 @@ import java.io.UnsupportedEncodingException;
  * Created by Akshay on 3/24/2015.
  */
 public class LoginActivity extends Activity{
-//    final Session session = (Session) getApplicationContext();
+
     EditText username,password;
 
 
@@ -78,11 +78,14 @@ public class LoginActivity extends Activity{
     }
 
     private void doLogin() {
+
         StringEntity entity = null;
         JSONObject jsonParams = new JSONObject();
+        String email=username.getText().toString();
+        String pass=password.getText().toString();
         try {
-            jsonParams.put("email", "test@test.com");
-            jsonParams.put("password", "12345");
+            jsonParams.put("email", email);
+            jsonParams.put("password", pass);
             entity = new StringEntity(jsonParams.toString());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -96,6 +99,9 @@ public class LoginActivity extends Activity{
 
             @Override
             public void onSuccess(String response) {
+                View v;
+                Toast toast;
+                TextView text;
                 //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject obj = new JSONObject(response);
@@ -105,15 +111,22 @@ public class LoginActivity extends Activity{
                         String sessionID=json2.getString("session");
                         String first_name=json2.getString("firstname");
                         String username=json2.getString("email");
-
-                       /* session.setSession_id(sessionID);
+                        final Session session = (Session) getApplicationContext();
+                        session.setSession_id(sessionID);
                         session.setFirstname(first_name);
-                        session.setUsername(username);*/
+                        session.setUsername(username);
                         Toast.makeText(getApplicationContext(), "Welcome "+first_name, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        String error=obj.getString("error");
-                        Toast.makeText(getApplicationContext(), "Success" + error, Toast.LENGTH_SHORT).show();
+                        //String error=obj.getString("error");
+                        toast=Toast.makeText(getApplicationContext(), "Username & Password Mismatch", Toast.LENGTH_SHORT);
+                        v = toast.getView();
+                        text = (TextView) v.findViewById(android.R.id.message);
+                        text.setTextColor(getResources().getColor(R.color.mWhite));
+                        text.setShadowLayer(0,0,0,0);
+                        v.setBackgroundResource(R.color.mRed);
+                        //toast.setGravity(Gravity.TOP, 0, 950);
+                        toast.show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -123,7 +136,17 @@ public class LoginActivity extends Activity{
             @Override
             public void onFailure(int statusCode, Throwable error,
                                   String content) {
-                Toast.makeText(getApplicationContext(), "Damn", Toast.LENGTH_SHORT).show();
+                View v;
+                Toast toast;
+                TextView text;
+                toast=Toast.makeText(getApplicationContext(), "Something went wrong at Server Side!", Toast.LENGTH_SHORT);
+                v = toast.getView();
+                text = (TextView) v.findViewById(android.R.id.message);
+                text.setTextColor(getResources().getColor(R.color.mWhite));
+                text.setShadowLayer(0,0,0,0);
+                v.setBackgroundResource(R.color.mRed);
+                //toast.setGravity(Gravity.TOP, 0, 950);
+                toast.show();
             }
 
         });

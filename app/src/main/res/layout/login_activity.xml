@@ -90,6 +90,7 @@
                 android:text="Skip"
                 android:textSize="20sp"
                 android:id="@+id/skip"
+                android:onClick="skip"
                 />
         </LinearLayout>
 
