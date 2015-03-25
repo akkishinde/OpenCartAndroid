@@ -24,7 +24,7 @@ import java.io.UnsupportedEncodingException;
  * Created by Akshay on 3/24/2015.
  */
 public class LoginActivity extends Activity{
-    final Session session = (Session) getApplicationContext();
+//    final Session session = (Session) getApplicationContext();
     EditText username,password;
 
 
@@ -42,7 +42,7 @@ public class LoginActivity extends Activity{
         Toast toast;
         TextView text;
 
-        RequestParams params = new RequestParams();
+
         String nowEmail = username.getText().toString();
         String nowPass = password.getText().toString();
         if (Validation.isNotNull(nowEmail) && Validation.isNotNull(nowPass)) {
@@ -106,9 +106,9 @@ public class LoginActivity extends Activity{
                         String first_name=json2.getString("firstname");
                         String username=json2.getString("email");
 
-                        session.setSession_id(sessionID);
+                       /* session.setSession_id(sessionID);
                         session.setFirstname(first_name);
-                        session.setUsername(username);
+                        session.setUsername(username);*/
                         Toast.makeText(getApplicationContext(), "Welcome "+first_name, Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -132,6 +132,11 @@ public class LoginActivity extends Activity{
     public void register(View view)
     {
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+    public void skip(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
