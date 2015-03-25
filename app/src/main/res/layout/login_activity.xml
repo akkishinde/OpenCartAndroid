@@ -63,7 +63,8 @@
             android:layout_height="45dp"
             android:textColor="@color/mOrange"
             android:background="@drawable/login_selector"
-            android:singleLine="false" />
+            android:singleLine="false"
+            android:onClick="login"/>
 
         <LinearLayout
             android:layout_height="wrap_content"
