@@ -116,7 +116,7 @@ public class LoginActivity extends Activity{
                         session.setFirstname(first_name);
                         session.setUsername(username);
 
-                        toast=Toast.makeText(getApplicationContext(), "Welcome "+first_name, Toast.LENGTH_SHORT);
+                        toast=Toast.makeText(getApplicationContext(), "Welcome "+first_name+"\n"+sessionID, Toast.LENGTH_SHORT);
                         v = toast.getView();
                         text = (TextView) v.findViewById(android.R.id.message);
                         text.setTextColor(getResources().getColor(R.color.mWhite));
