@@ -207,7 +207,8 @@
             android:text="Register"
             android:textSize="18sp"
             android:textColorHighlight="@color/mWhite"
-            android:singleLine="false" /></LinearLayout>
+            android:singleLine="false"
+            android:onClick="register"/></LinearLayout>
 
     </LinearLayout>
 
