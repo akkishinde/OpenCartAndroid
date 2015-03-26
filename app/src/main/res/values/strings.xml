@@ -11,4 +11,15 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="first_name_str">First Name</string>
+    <string name="last_name_str">Last Name</string>
+    <string name="email_str">Email ID</string>
+    <string name="password_str">Password</string>
+    <string name="repeat_pass_str">Retype Password</string>
+    <string name="contact_str">Mobile Number</string>
+    <string name="address1_str">Address Line 1</string>
+    <string name="address2_str">Address Line 2</string>
+    <string name="city_str">Aurangabad</string>
+    <string name="register_btn">Register</string>
+    <string name="signin_btn">Sign In</string>
 </resources>
