@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             >
             <EditText
-                android:id="@+id/first_name"
+                android:id="@+id/firstname_text"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="20dip"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/last_name"
+                android:id="@+id/lastname_text"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="20dip"
@@ -102,7 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/retype_password_text"
+            android:id="@+id/repeatpassword_text"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="20dip"
@@ -199,11 +199,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/dummy_button"
+            android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:textColor="@color/mOrange"
+            android:textColor="@color/mWhite"
             android:background="@drawable/login_selector"
+            android:text="Register"
+            android:textSize="18sp"
+            android:textColorHighlight="@color/mWhite"
             android:singleLine="false" /></LinearLayout>
 
     </LinearLayout>

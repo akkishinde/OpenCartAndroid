@@ -58,10 +58,12 @@
             android:drawableStart="@drawable/password" />
 
         <Button
-            android:id="@+id/dummy_button"
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:textColor="@color/mOrange"
+            android:textColor="@color/mWhite"
+            android:text="Sign In"
+            android:textSize="18sp"
             android:background="@drawable/login_selector"
             android:singleLine="false"
             android:onClick="login"/>
