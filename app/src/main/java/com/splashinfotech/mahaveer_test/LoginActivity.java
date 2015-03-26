@@ -167,26 +167,11 @@ public class LoginActivity extends Activity{
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-    public void skip(View view)
+    /*public void skip(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_delete).setTitle("Exit")
-                .setMessage("Are you sure?")
-                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+    }*/
 
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    }
-                }).setNegativeButton("no", null).show();
-    }
 
 }
