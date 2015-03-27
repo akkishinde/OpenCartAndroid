@@ -1,6 +1,7 @@
 package com.splashinfotech.mahaveer_test;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class RegisterActivity extends Activity{
     EditText firstname,lastname,username,password,repeat_password,contact,address1,address2,city;
+    ProgressDialog prgDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,8 @@ public class RegisterActivity extends Activity{
         address1=(EditText)findViewById(R.id.address1_text);
         address2=(EditText)findViewById(R.id.address2_text);
         city=(EditText)findViewById(R.id.city_text);
+        prgDialog = new ProgressDialog(this);
+        prgDialog.setMessage("Please wait...");
 
     }
     public void register(View view)
@@ -94,7 +98,7 @@ public class RegisterActivity extends Activity{
 
     private void doRegister() {
 
-
+        prgDialog.show();
         String fname=firstname.getText().toString();
         String lname=lastname.getText().toString();
         String email=username.getText().toString();
@@ -136,6 +140,7 @@ public class RegisterActivity extends Activity{
         client.post(getApplicationContext(), "http://webshop.opencart-api.com/api/rest/register", entity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
+                prgDialog.hide();
                 try {
                     View v;
                     Toast toast;
@@ -174,6 +179,7 @@ public class RegisterActivity extends Activity{
             @Override
             public void onFailure(int statusCode, Throwable error,
                                   String content) {
+                prgDialog.hide();
 
             }
         });

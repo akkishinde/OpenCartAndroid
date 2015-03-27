@@ -2,9 +2,11 @@ package com.splashinfotech.mahaveer_test;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,8 +27,10 @@ import java.io.UnsupportedEncodingException;
  * Created by Akshay on 3/24/2015.
  */
 public class LoginActivity extends Activity{
-
+    static AsyncHttpClient client = new AsyncHttpClient();
+    private static final String TAG = "";
     EditText username,password;
+    ProgressDialog prgDialog;
 
 
   @Override
@@ -34,6 +39,8 @@ public class LoginActivity extends Activity{
       setContentView(R.layout.login_activity);
       username=(EditText)findViewById(R.id.username_text);
       password=(EditText)findViewById(R.id.password_text);
+      prgDialog = new ProgressDialog(this);
+      prgDialog.setMessage("Please wait...");
 
 
   }
@@ -83,6 +90,7 @@ public class LoginActivity extends Activity{
         JSONObject jsonParams = new JSONObject();
         String email=username.getText().toString();
         String pass=password.getText().toString();
+        prgDialog.show();
         try {
             jsonParams.put("email", email);
             jsonParams.put("password", pass);
@@ -92,13 +100,14 @@ public class LoginActivity extends Activity{
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        AsyncHttpClient client = new AsyncHttpClient();
+
         client.addHeader("X-Oc-Merchant-Id","123");
         client.addHeader("X-Oc-Merchant-Language","en");
         client.post(getApplicationContext(), "http://webshop.opencart-api.com/api/rest/login", entity, "application/json", new AsyncHttpResponseHandler() {
 
             @Override
-            public void onSuccess(String response) {
+            public void onSuccess(int i,Header[] headers,String response) {
+                prgDialog.hide();
                 View v;
                 Toast toast;
                 TextView text;
@@ -115,8 +124,11 @@ public class LoginActivity extends Activity{
                         session.setSession_id(sessionID);
                         session.setFirstname(first_name);
                         session.setUsername(username);
-
-                        toast=Toast.makeText(getApplicationContext(), "Welcome "+first_name+"\n"+sessionID, Toast.LENGTH_SHORT);
+                        /*for(i=0;i<headers.length;i++)
+                        {
+                            //Log.i(TAG,"i="+i+" "+headers[i]+"\n");
+                        }*/
+                        toast=Toast.makeText(getApplicationContext(), "Welcome "+first_name+"\n"+"SessionID"+sessionID+"\nHeader"+headers[5].toString(), Toast.LENGTH_SHORT);
                         v = toast.getView();
                         text = (TextView) v.findViewById(android.R.id.message);
                         text.setTextColor(getResources().getColor(R.color.mWhite));
@@ -146,6 +158,7 @@ public class LoginActivity extends Activity{
             @Override
             public void onFailure(int statusCode, Throwable error,
                                   String content) {
+                prgDialog.hide();
                 View v;
                 Toast toast;
                 TextView text;

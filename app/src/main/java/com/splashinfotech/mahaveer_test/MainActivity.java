@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
 
 
 public class MainActivity extends ActionBarActivity
@@ -44,13 +49,17 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
+       /* ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources()
+                .getColor(R.color.mOrange)));
+        */
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         final Session session = (Session) getApplicationContext();
         Toast.makeText(getApplicationContext(),"ID"+session.getSession_id(),Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -156,19 +165,34 @@ public class MainActivity extends ActionBarActivity
     }
     @Override
     public void onBackPressed() {
+        final Session session = (Session) getApplicationContext();
+        final String sessID=session.getSession_id();
         new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_delete).setTitle("Exit")
                 .setMessage("Are you sure?")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        LoginActivity.client.addHeader("X-Oc-Merchant-Id", "123");
+                        LoginActivity.client.addHeader("X-Oc-Merchant-Language", "en");
+                        LoginActivity.client.addHeader("X-Oc-Session", sessID);
+                        LoginActivity.client.post("http://webshop.opencart-api.com/api/rest/logout", new AsyncHttpResponseHandler() {});
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                            startActivity(intent);
+
+                            finish();
+                        }
                     }
-                }).setNegativeButton("no", null).show();
-    }
 
-}
+                    ).
+
+                    setNegativeButton("no",null)
+
+                    .
+
+                    show();
+                }
+
+    }
