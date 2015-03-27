@@ -132,10 +132,7 @@ public class NavigationDrawerFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-              /*  Log.i(TAG, "count" + cat_count);
-                Log.i(TAG, "cat0" + category.get(0));
-                Log.i(TAG, "cat1" + category.get(2));
-                Log.i(TAG, "cat3" + category.get(3));*/
+
                 mDrawerListView.setAdapter(new ArrayAdapter<String>(
                         getActionBar().getThemedContext(),
                         android.R.layout.simple_list_item_activated_1,

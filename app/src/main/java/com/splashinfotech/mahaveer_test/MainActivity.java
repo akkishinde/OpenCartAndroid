@@ -23,9 +23,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity
@@ -40,7 +46,9 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
+    static int cat_count;
+    ArrayList<String> category = new <String>ArrayList<String>();
+    ArrayList<String> category_id = new <String>ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,18 +80,63 @@ public class MainActivity extends ActionBarActivity
                 .commit();
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
+
+    public void onSectionAttached(final int number) {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.addHeader("X-Oc-Merchant-Id", "123");
+        client.addHeader("X-Oc-Merchant-Language", "en");
+        client.get("http://webshop.opencart-api.com/api/rest/categories", new AsyncHttpResponseHandler() {
+            public static final String TAG = "";
+
+            @Override
+            public void onSuccess(String response) {
+                // Log.i(TAG,"resp= "+response);
+                try {
+                    JSONObject resp = new JSONObject(response);
+                    if (resp.getString("success").equals("true")) {
+                        JSONArray array = resp.getJSONArray("data");
+                        cat_count = array.length();
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject ArrObj = array.getJSONObject(i);
+                            category.add(ArrObj.getString("name"));
+                            category_id.add(ArrObj.getString("category_id"));
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                switch (number) {
+                    case 1:
+                        mTitle = category.get(0);
+                        break;
+                    case 2:
+                        mTitle = category.get(1).replaceAll("&amp;","&");
+                        break;
+                    case 3:
+                        mTitle = category.get(2);
+                        break;
+                    case 4:
+                        mTitle = category.get(3);
+                        break;
+                    case 5:
+                        mTitle = category.get(4);
+                        break;
+                    case 6:
+                        mTitle = category.get(5).replaceAll("&amp;","&");
+                        break;
+                    case 7:
+                        mTitle = category.get(6);
+                        break;
+                    case 8:
+                        mTitle = category.get(7);
+                        break;
+
+                }
+
+            }
+        });
+
     }
 
     public void restoreActionBar() {
