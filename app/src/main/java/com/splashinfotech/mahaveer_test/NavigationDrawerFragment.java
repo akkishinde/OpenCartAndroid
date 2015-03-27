@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,37 +74,6 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        AsyncHttpClient client=new AsyncHttpClient();
-        client.addHeader("X-Oc-Merchant-Id", "123");
-        client.addHeader("X-Oc-Merchant-Language", "en");
-        client.get("http://webshop.opencart-api.com/api/rest/categories", new AsyncHttpResponseHandler() {
-            public static final String TAG = "";
-
-            @Override
-            public void onSuccess(String response) {
-                // Log.i(TAG,"resp= "+response);
-                try {
-                    JSONObject resp = new JSONObject(response);
-                    if (resp.getString("success").equals("true")) {
-                        JSONArray array = resp.getJSONArray("data");
-                        cat_count = array.length();
-                        for (int i = 0; i < array.length(); i++) {
-                            JSONObject ArrObj = array.getJSONObject(i);
-                            category.add(ArrObj.getString("name"));
-                            category_id.add(ArrObj.getString("category_id"));
-                        }
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.i(TAG, "count" + cat_count);
-                Log.i(TAG, "cat0" + category.get(0));
-                Log.i(TAG, "cat1" + category.get(2));
-                Log.i(TAG, "cat3" + category.get(3));
-            }
-        });
-
         super.onCreate(savedInstanceState);
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
@@ -140,28 +108,57 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.addHeader("X-Oc-Merchant-Id", "123");
+        client.addHeader("X-Oc-Merchant-Language", "en");
+        client.get("http://webshop.opencart-api.com/api/rest/categories", new AsyncHttpResponseHandler() {
+            public static final String TAG = "";
 
-       mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                        getString(R.string.title_section3),
-                        /*category.get(0),
-                        category.get(1),
-                        category.get(2),
-                        category.get(3),
-                        category.get(4),
-                        category.get(5),
-                        category.get(6),
-                        category.get(7),
-                        category.get(8)*/
+            @Override
+            public void onSuccess(String response) {
+                // Log.i(TAG,"resp= "+response);
+                try {
+                    JSONObject resp = new JSONObject(response);
+                    if (resp.getString("success").equals("true")) {
+                        JSONArray array = resp.getJSONArray("data");
+                        cat_count = array.length();
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject ArrObj = array.getJSONObject(i);
+                            category.add(ArrObj.getString("name"));
+                            category_id.add(ArrObj.getString("category_id"));
+                        }
 
-                }));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+              /*  Log.i(TAG, "count" + cat_count);
+                Log.i(TAG, "cat0" + category.get(0));
+                Log.i(TAG, "cat1" + category.get(2));
+                Log.i(TAG, "cat3" + category.get(3));*/
+                mDrawerListView.setAdapter(new ArrayAdapter<String>(
+                        getActionBar().getThemedContext(),
+                        android.R.layout.simple_list_item_activated_1,
+                        android.R.id.text1,
+
+                        new String[]{
+                                //getString(R.string.title_section1),
+                                //getString(R.string.title_section2),
+                                //getString(R.string.title_section3),
+                                category.get(0),
+                                category.get(1).replaceAll("&amp;","&"),
+                                category.get(2),
+                                category.get(3),
+                                category.get(4),
+                                category.get(5).replaceAll("&amp;","&"),
+                                category.get(6),
+                                category.get(7),
+                        }));
+                mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+            }
+        });
+
+
         return mDrawerListView;
     }
 
