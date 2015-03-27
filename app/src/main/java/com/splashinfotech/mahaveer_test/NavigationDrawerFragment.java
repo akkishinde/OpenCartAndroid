@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -57,12 +67,45 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
-
+    static int cat_count;
+    ArrayList<String> category = new <String>ArrayList<String>();
+    ArrayList<String> category_id = new <String>ArrayList<String>();
     public NavigationDrawerFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.addHeader("X-Oc-Merchant-Id", "123");
+        client.addHeader("X-Oc-Merchant-Language", "en");
+        client.get("http://webshop.opencart-api.com/api/rest/categories", new AsyncHttpResponseHandler() {
+            public static final String TAG = "";
+
+            @Override
+            public void onSuccess(String response) {
+                // Log.i(TAG,"resp= "+response);
+                try {
+                    JSONObject resp = new JSONObject(response);
+                    if (resp.getString("success").equals("true")) {
+                        JSONArray array = resp.getJSONArray("data");
+                        cat_count = array.length();
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject ArrObj = array.getJSONObject(i);
+                            category.add(ArrObj.getString("name"));
+                            category_id.add(ArrObj.getString("category_id"));
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i(TAG, "count" + cat_count);
+                Log.i(TAG, "cat0" + category.get(0));
+                Log.i(TAG, "cat1" + category.get(2));
+                Log.i(TAG, "cat3" + category.get(3));
+            }
+        });
+
         super.onCreate(savedInstanceState);
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
@@ -97,7 +140,8 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+       mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
@@ -105,6 +149,17 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
+                        getString(R.string.title_section3),
+                        /*category.get(0),
+                        category.get(1),
+                        category.get(2),
+                        category.get(3),
+                        category.get(4),
+                        category.get(5),
+                        category.get(6),
+                        category.get(7),
+                        category.get(8)*/
+
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
